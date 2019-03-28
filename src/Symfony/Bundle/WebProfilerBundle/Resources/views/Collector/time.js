@@ -224,7 +224,12 @@ class Legend {
     }
 
     add(category) {
-        this.get(category).classList.add('present');
+        let element = this.get(category);
+        if (!element) {
+            element = this.createCategory(category)
+            this.categories.push(element);
+        }
+        element.classList.add('present');
     }
 
     createCategory(category) {
@@ -256,7 +261,13 @@ class Legend {
     }
 
     getClassname(category) {
-        return this.classnames[category];
+        let className = this.classnames[category];
+        if (!className) {
+            className = this.getDefaultClassname();
+            this.classnames[category] = className;
+        }
+
+        return className;
     }
 
     getSectionClassname() {
